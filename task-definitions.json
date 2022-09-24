@@ -25,7 +25,7 @@
       "workingDirectory": null,
       "secrets": null,
       "dockerSecurityOptions": null,
-      "memory": 128,
+      "memory": null,
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
@@ -56,8 +56,8 @@
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:339481264571:task-definition/ReactDeploymentContainer:1",
-  "family": "ReactDeploymentContainer",
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-1:339481264571:task-definition/DeploymentContainer:5",
+  "family": "DeploymentContainer",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -73,7 +73,7 @@
   "networkMode": null,
   "runtimePlatform": null,
   "cpu": "1024",
-  "revision": 1,
+  "revision": 5,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
