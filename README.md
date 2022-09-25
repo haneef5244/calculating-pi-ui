@@ -26,7 +26,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 # Application hosted on AWS EC2
 
-Open https://54.255.209.26 to view the website hosted on AWS EC2
+Open http://54.255.209.26 to view the website hosted on AWS EC2
 
 # Limitations
 
