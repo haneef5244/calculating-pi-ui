@@ -1,26 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { getCurrentPi, calculateMoreAccuratePi } from '../../service/homeService';
 import './index.scss';
 
 const Home = () => {
     const [piValue, setPiValue] = useState(null);
     const [circumferenceOfSun, setCircumferenceOfSun] = useState(null);
+    const [alert, setAlert] = useState({
+        title: '',
+        message: '',
+        isVisible: false,
+        type: ''
+    })
+
+    const resetAlertState = () => {
+        setAlert({
+            title: '',
+            message: '',
+            isVisible: false,
+            type: ''
+        })
+    }
 
     const getCurrentPiValue = () => {
         getCurrentPi().then(res => {
             switch (res.status) {
                 case 200: {
-                    const newPiWithDecimal = '3.' + res.data.pi_value.substring(1, res.data.pi_value.length)
-
                     setPiValue(res.data.pi_value);
                     break;
                 }
                 case 204:
-                    window.alert('No pi value was calculated before, please calculate before getting new value')
+                    setAlert({
+                        title: 'No PI Was Calculated Previously!',
+                        message: 'Please click on the Get a more accurate Pi value button',
+                        isVisible: true,
+                        type: 'info'
+                    })
+                    setTimeout(() => {
+                        resetAlertState()
+                    }, 5000)
                     break;
                 default:
-                    window.alert('Something went wrong, please try again')
+                    setAlert({
+                        title: 'Something Went Wrong!',
+                        message: 'Please try again!',
+                        isVisible: true,
+                        type: 'danger'
+                    })
+                    setTimeout(() => {
+                        resetAlertState()
+                    }, 5000)
                     break;
             }
         })
@@ -28,7 +57,7 @@ const Home = () => {
 
     useEffect(() => {
         getCurrentPiValue()
-    })
+    }, [])
 
     const getPiValueWithDecimal = () => {
         if (!piValue) return piValue
@@ -79,10 +108,16 @@ const Home = () => {
 
             <Row>
                 <Col><Button className='calculate-pi-button' onClick={calculatePi}>Get a more accurate Pi value</Button></Col>
-
             </Row>
-
+            <Alert show={alert.isVisible} variant={alert.type}>
+                <Alert.Heading>{alert.title}</Alert.Heading>
+                <hr></hr>
+                <p>
+                    {alert.message}
+                </p>
+            </Alert>
         </div>
+
     </Container >
 }
 
