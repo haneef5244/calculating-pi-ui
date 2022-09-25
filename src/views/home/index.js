@@ -61,8 +61,7 @@ const Home = () => {
 
     const getPiValueWithDecimal = () => {
         if (!piValue) return piValue
-        else if (piValue.length === 1) return piValue
-        else return '3.' + piValue.substring(1, piValue.length)
+        return piValue
     }
 
     const calculatePi = () => {
@@ -73,14 +72,14 @@ const Home = () => {
 
     const calculateCircumferenceOfSun = () => {
         const diameterOfSun = 1392530;
-        setCircumferenceOfSun((diameterOfSun * `${'3.' + piValue.substring(1, piValue.length)}`));
+        setCircumferenceOfSun((diameterOfSun * `${piValue}`));
     }
 
     return <Container fluid>
         <div className='homepage-container'>
             <div className='card-section'>
                 <Row>
-                    <Col lg={6} xl={6} md={6} sm={6} xs={12}>
+                    <Col lg={6} xl={6} md={6} sm={6} xs={12} className='card-container'>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Current PI Value</Card.Title>
@@ -91,7 +90,7 @@ const Home = () => {
                             </Card.Body>
                         </Card></Col>
 
-                    <Col lg={6} xl={6} md={6} sm={6} xs={12}>
+                    <Col lg={6} xl={6} md={6} sm={6} xs={12} className='card-container'>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Circumference of Sun</Card.Title>
