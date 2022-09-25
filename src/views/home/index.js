@@ -22,6 +22,18 @@ const Home = () => {
         })
     }
 
+    const displayNoPiAlert = () => {
+        setAlert({
+            title: 'No PI Was Calculated Previously!',
+            message: 'Please click on the Get a more accurate Pi value button',
+            isVisible: true,
+            type: 'info'
+        })
+        setTimeout(() => {
+            resetAlertState()
+        }, 5000)
+    }
+
     const getCurrentPiValue = () => {
         getCurrentPi().then(res => {
             switch (res.status) {
@@ -30,15 +42,7 @@ const Home = () => {
                     break;
                 }
                 case 204:
-                    setAlert({
-                        title: 'No PI Was Calculated Previously!',
-                        message: 'Please click on the Get a more accurate Pi value button',
-                        isVisible: true,
-                        type: 'info'
-                    })
-                    setTimeout(() => {
-                        resetAlertState()
-                    }, 5000)
+                    displayNoPiAlert()
                     break;
                 default:
                     setAlert({
@@ -71,6 +75,10 @@ const Home = () => {
     }
 
     const calculateCircumferenceOfSun = () => {
+        if (!piValue) {
+            displayNoPiAlert()
+            return;
+        }
         const diameterOfSun = 1392530;
         setCircumferenceOfSun((diameterOfSun * `${piValue}`));
     }
